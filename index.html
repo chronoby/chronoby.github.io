@@ -309,49 +309,60 @@
 <li>提交更新，找到暂存区的文件，将快照永久性存储到 Git 目录。</li>
 </ul>
 <h2 id="Git-常用命令"><a href="#Git-常用命令" class="headerlink" title="Git 常用命令"></a>Git 常用命令</h2><ul>
-<li>获取 Git 仓库<br>有以下两种方式：</li>
+<li>获取 Git 仓库   </li>
 </ul>
+<p>有以下两种方式：</p>
 <ol>
 <li>在已存在目录中初始化仓库</li>
 </ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git init</span><br></pre></td></tr></table></figure>
 <p>该命令将创建一个名为 <code>.git</code> 的子目录，这个子目录含有你初始化的 Git 仓库中所有的必须文件。</p>
 <ol start="2">
-<li>克隆现有的仓库<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git clone &lt;url&gt;</span><br></pre></td></tr></table></figure>
-比如，要克隆 Git 的链接库 libgit2，可以用下面的命令：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git clone https:&#x2F;&#x2F;github.com&#x2F;libgit2&#x2F;libgit2</span><br></pre></td></tr></table></figure>
-</li>
+<li>克隆现有的仓库</li>
 </ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git clone &lt;url&gt;</span><br></pre></td></tr></table></figure>
+<p>比如，要克隆 Git 的链接库 libgit2，可以用下面的命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git clone https:&#x2F;&#x2F;github.com&#x2F;libgit2&#x2F;libgit2</span><br></pre></td></tr></table></figure>
+
 <ul>
-<li><p>检查当前文件状态<br>查看仓库下文件处于什么状态。</p>
+<li>检查当前文件状态</li>
+</ul>
+<p>查看仓库下文件处于什么状态。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git status</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>跟踪新文件</p>
+
+<ul>
+<li>跟踪新文件</li>
+</ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git add &lt;filename&gt;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>提交更新</p>
+
+<ul>
+<li>提交更新</li>
+</ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git commit</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>重新提交</p>
-</li>
+
+<ul>
+<li>重新提交</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git commit --amend</span><br></pre></td></tr></table></figure>
 
 <ul>
-<li><p>查看提交历史</p>
+<li>查看提交历史</li>
+</ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git log</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>取消暂存区的文件</p>
-</li>
+
+<ul>
+<li>取消暂存区的文件</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset HEAD &lt;filename&gt;</span><br></pre></td></tr></table></figure>
 
 
 <ul>
-<li><p>撤消对文件的修改</p>
+<li>撤消对文件的修改</li>
+</ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git checkout -- &lt;filename&gt;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>查看远程仓库</p>
-</li>
+
+<ul>
+<li>查看远程仓库</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git remote -v</span><br></pre></td></tr></table></figure>
 <p>将远程仓库全部列出</p>
