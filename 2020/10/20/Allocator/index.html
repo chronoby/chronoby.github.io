@@ -79,11 +79,15 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Chronoby&#39;s Blog">
-<meta property="og:url" content="http://yoursite.com/blog/index.html">
+<meta name="description" content="Allocator前言从STL运用角度而言，空间配置器是最不需要介绍的东西，它隐藏在一切组件背后。但若以STL实现角度而言，第一个需要介绍的就是空间配置去，因为整个STL的操作对象都存放在容器之内，而容器一定需要配置空间。 以下介绍的是SGI STL提供的配置器 C++内存配置和释放操作123class Foo &amp;#123;...&amp;#125;;Foo * pf &#x3D; new Foo;delete p">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Allocator">
+<meta property="og:url" content="http://yoursite.com/blog/2020/10/20/Allocator/index.html">
 <meta property="og:site_name" content="Chronoby&#39;s Blog">
+<meta property="og:description" content="Allocator前言从STL运用角度而言，空间配置器是最不需要介绍的东西，它隐藏在一切组件背后。但若以STL实现角度而言，第一个需要介绍的就是空间配置去，因为整个STL的操作对象都存放在容器之内，而容器一定需要配置空间。 以下介绍的是SGI STL提供的配置器 C++内存配置和释放操作123class Foo &amp;#123;...&amp;#125;;Foo * pf &#x3D; new Foo;delete p">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-10-20T15:12:28.000Z">
+<meta property="article:modified_time" content="2020-10-20T15:12:49.302Z">
 <meta property="article:author" content="Chronoby">
 <meta name="twitter:card" content="summary">
 
@@ -115,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/blog/"/>
+  <link rel="canonical" href="http://yoursite.com/blog/2020/10/20/Allocator/"/>
 
 
 
 
 
-  <title>Chronoby's Blog</title>
+  <title>Allocator | Chronoby's Blog</title>
   
 
 
@@ -140,8 +144,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -234,9 +237,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -266,9 +269,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/blog/2020/10/20/Allocator/" itemprop="url">Allocator</a></h1>
+          <h1 class="post-title" itemprop="name headline">Allocator</h1>
         
 
         <div class="post-meta">
@@ -318,9 +319,7 @@
       
 
       
-        
-          
-            <h1 id="Allocator"><a href="#Allocator" class="headerlink" title="Allocator"></a>Allocator</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>从STL运用角度而言，空间配置器是最不需要介绍的东西，它隐藏在一切组件背后。但若以STL实现角度而言，第一个需要介绍的就是空间配置去，因为整个STL的操作对象都存放在容器之内，而容器一定需要配置空间。</p>
+        <h1 id="Allocator"><a href="#Allocator" class="headerlink" title="Allocator"></a>Allocator</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>从STL运用角度而言，空间配置器是最不需要介绍的东西，它隐藏在一切组件背后。但若以STL实现角度而言，第一个需要介绍的就是空间配置去，因为整个STL的操作对象都存放在容器之内，而容器一定需要配置空间。</p>
 <p>以下介绍的是SGI STL提供的配置器</p>
 <h3 id="C-内存配置和释放操作"><a href="#C-内存配置和释放操作" class="headerlink" title="C++内存配置和释放操作"></a>C++内存配置和释放操作</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span> &#123;</span>...&#125;;</span><br><span class="line">Foo * pf = <span class="keyword">new</span> Foo;</span><br><span class="line"><span class="keyword">delete</span> pf;</span><br></pre></td></tr></table></figure>
 
@@ -414,8 +413,6 @@
 <li>否则抛出bad_alloc异常</li>
 </ul>
 
-          
-        
       
     </div>
     
@@ -432,217 +429,28 @@
       
 
       
-
-      
-
       
       
-        <div class="post-eof"></div>
+
       
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/blog/blog/2020/07/11/Git-%E7%AE%80%E4%BB%8B%E5%92%8C%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Chronoby">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/blog/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Chronoby's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/blog/2020/07/11/Git-%E7%AE%80%E4%BB%8B%E5%92%8C%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C/" itemprop="url">Git 简介和基础操作</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
             
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-07-11T17:55:12+08:00">
-                2020-07-11
-              </time>
+              <a href="/blog/2020/07/11/Git-%E7%AE%80%E4%BB%8B%E5%92%8C%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C/" rel="next" title="Git 简介和基础操作">
+                <i class="fa fa-chevron-left"></i> Git 简介和基础操作
+              </a>
             
+          </div>
 
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
             
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
+          </div>
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          
-            <h1 id="Git-简介和基础操作"><a href="#Git-简介和基础操作" class="headerlink" title="Git 简介和基础操作"></a>Git 简介和基础操作</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Git，是Linux开发者Linus开发的分布式版本控制系统（distributed revision control system）。版本控制系统是能够随着时间的推进记录一系列文件的变化以便于你以后想要的退回到某个版本的系统。版本控制系统分为三大类：本地版本控制系统，集中式版本控制系统和分布式版本控制系统。</p>
-<h2 id="Git-基础"><a href="#Git-基础" class="headerlink" title="Git 基础"></a>Git 基础</h2><p>不同于其他以文件变更列表的方式存储信息的系统（通常被称作基于差异（delta-based）的版本控制），在 Git 中，每当提交更新或保存项目状态是，它会对当时的全部文件创建一个快照并保存这个快照的索引。<br>Git工程有三个工作区域：工作目录，暂存区域，以及本地仓库。工作目录是你当前进行工作的区域；暂存区域是你运行<code>git add</code>命令后文件保存的区域，也是下次提交将要保存的文件；本地仓库就是版本库，记录了你工程某次提交的完整状态和内容，这意味着你的数据永远不会丢失。</p>
-<p>文件也有三种状态：已提交（committed），已修改（modified）和已暂存（staged）。已提交表示该文件已经被安全地保存在本地版本库中了；已修改表示修改了某个文件，但还没有提交保存；已暂存表示把已修改的文件放在下次提交时要保存的清单中，即暂存区域。<br>基本的 Git 工作流程如下：</p>
-<ul>
-<li>在工作区中修改文件。</li>
-<li>将你想要下次提交的更改选择性地暂存，这样只会将更改的部分添加到暂存区。</li>
-<li>提交更新，找到暂存区的文件，将快照永久性存储到 Git 目录。</li>
-</ul>
-<h2 id="Git-常用命令"><a href="#Git-常用命令" class="headerlink" title="Git 常用命令"></a>Git 常用命令</h2><ul>
-<li>获取 Git 仓库   </li>
-</ul>
-<p>有以下两种方式：</p>
-<ol>
-<li>在已存在目录中初始化仓库</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git init</span><br></pre></td></tr></table></figure>
-<p>该命令将创建一个名为 <code>.git</code> 的子目录，这个子目录含有你初始化的 Git 仓库中所有的必须文件。</p>
-<ol start="2">
-<li>克隆现有的仓库</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git clone &lt;url&gt;</span><br></pre></td></tr></table></figure>
-<p>比如，要克隆 Git 的链接库 libgit2，可以用下面的命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git clone https:&#x2F;&#x2F;github.com&#x2F;libgit2&#x2F;libgit2</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>检查当前文件状态</li>
-</ul>
-<p>查看仓库下文件处于什么状态。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git status</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>跟踪新文件</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git add &lt;filename&gt;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>提交更新</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git commit</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>重新提交</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git commit --amend</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>查看提交历史</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git log</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>取消暂存区的文件</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset HEAD &lt;filename&gt;</span><br></pre></td></tr></table></figure>
-
-
-<ul>
-<li>撤消对文件的修改</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git checkout -- &lt;filename&gt;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>查看远程仓库</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git remote -v</span><br></pre></td></tr></table></figure>
-<p>将远程仓库全部列出</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ cd grit</span><br><span class="line">$ git remote -v</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>自动抓取后合并该远程分支到当前分支</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git pull</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>推送到远程仓库</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git push origin master</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>获取帮助</li>
-</ul>
-<p>若你使用 Git 时需要获取帮助，有三种等价的方法可以找到 Git 命令的综合手册（manpage）：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git help &lt;verb&gt;</span><br><span class="line">$ git &lt;verb&gt; --help</span><br><span class="line">$ man git-&lt;verb&gt;</span><br></pre></td></tr></table></figure>
-
-<p>例如，要想获得 git config 命令的手册，执行</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git help config</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -652,10 +460,11 @@
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -663,6 +472,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -683,8 +496,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -726,6 +548,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Allocator"><span class="nav-number">1.</span> <span class="nav-text">Allocator</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#C-内存配置和释放操作"><span class="nav-number">1.1.1.</span> <span class="nav-text">C++内存配置和释放操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#构造和析构基本工具：construct-和destroy"><span class="nav-number">1.1.2.</span> <span class="nav-text">构造和析构基本工具：construct()和destroy()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#空间的分配和释放，std-alloc"><span class="nav-number">1.1.3.</span> <span class="nav-text">空间的分配和释放，std::alloc</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第一级配置器-malloc-alloc-template"><span class="nav-number">1.1.4.</span> <span class="nav-text">第一级配置器 __malloc_alloc_template</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第二级配置器-default-alloc-template"><span class="nav-number">1.1.5.</span> <span class="nav-text">第二级配置器 __default_alloc_template</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#空间配置函数allocate"><span class="nav-number">1.1.6.</span> <span class="nav-text">空间配置函数allocate()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#空间释放函数deallocate"><span class="nav-number">1.1.7.</span> <span class="nav-text">空间释放函数deallocate()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重新填充free-lists"><span class="nav-number">1.1.8.</span> <span class="nav-text">重新填充free lists</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内存池"><span class="nav-number">1.1.9.</span> <span class="nav-text">内存池</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -866,6 +704,10 @@
 
 
   
+  <script type="text/javascript" src="/blog/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/blog/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
