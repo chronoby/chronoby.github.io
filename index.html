@@ -268,7 +268,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/12/04/Hello_GoogleTest/" itemprop="url">Hello_GoogleTest</a></h1>
+                <a class="post-title-link" href="/2020/12/04/Hello_GoogleTest/" itemprop="url">Hello GoogleTest</a></h1>
         
 
         <div class="post-meta">
@@ -280,7 +280,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-12-04T12:19:14+08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-12-04T23:12:28+08:00">
                 2020-12-04
               </time>
             
@@ -290,6 +290,28 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Test/" itemprop="url" rel="index">
+                    <span itemprop="name">Test</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -319,43 +341,15 @@
 
       
         
-          
-            <h1 id="CMake-GoogleTest-单元测试入门"><a href="#CMake-GoogleTest-单元测试入门" class="headerlink" title="CMake + GoogleTest 单元测试入门"></a>CMake + GoogleTest 单元测试入门</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>GoogleTest 是一个跨平台的 C++ 测试框架，支持各种平台上不同类型的测试。被 Chromium, LLVM 和 OpenCV 等项目所使用。</p>
+          <h1 id="CMake-GoogleTest-单元测试入门"><a href="#CMake-GoogleTest-单元测试入门" class="headerlink" title="CMake + GoogleTest 单元测试入门"></a>CMake + GoogleTest 单元测试入门</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>GoogleTest 是一个跨平台的 C++ 测试框架，支持各种平台上不同类型的测试。被 Chromium, LLVM 和 OpenCV 等项目所使用。</p>
 <p>If you write C++ code, googletest can help you!</p>
-<h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><ul>
-<li>OS: Ubuntu 20.10</li>
-<li>CMAKE: 3.16.3</li>
-<li>GoogleTest: 1.10.0</li>
-</ul>
-<h2 id="构建-GoogleTest"><a href="#构建-GoogleTest" class="headerlink" title="构建 GoogleTest"></a>构建 GoogleTest</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/google/googletest.git -b release-1.10.0</span><br><span class="line"><span class="built_in">cd</span> googletest</span><br><span class="line">mkdir build</span><br><span class="line"><span class="built_in">cd</span> build</span><br><span class="line">cmake ..</span><br><span class="line">make</span><br><span class="line">sudo make install</span><br></pre></td></tr></table></figure>
-
-<h2 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h2><p>我们来体验一下</p>
-<p>bubblesort.h</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;data, <span class="keyword">int</span> i, <span class="keyword">int</span> j)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">bubblesort</span><span class="params">(<span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;data, <span class="keyword">int</span> n)</span></span>;</span><br></pre></td></tr></table></figure>
-
-<p>bubblesort.cpp</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"bubblesort.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;data, <span class="keyword">int</span> i, <span class="keyword">int</span> j)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> temp = data[i];</span><br><span class="line">    data[i] = data[j];</span><br><span class="line">    data[j] = temp;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">bubblesort</span><span class="params">(<span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;data, <span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n - <span class="number">1</span>; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n - i - <span class="number">1</span>; ++j)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(data[j] &gt; data[j + <span class="number">1</span>])</span><br><span class="line">                swap(data, j, j + <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>main.cpp</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"bubblesort.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; a = &#123;<span class="number">7</span>, <span class="number">1</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">2</span>, <span class="number">8</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">0</span>&#125;;</span><br><span class="line">    bubblesort(a, a.size());</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; a.size(); ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; a[i] &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>test.cpp</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"bubblesort.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;gtest/gtest.h&gt;</span></span></span><br><span class="line"></span><br><span class="line">TEST(test, case1)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; a = &#123;<span class="number">7</span>, <span class="number">1</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">2</span>, <span class="number">8</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">0</span>&#125;;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; b = &#123;<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>&#125;;</span><br><span class="line">    bubblesort(a, a.size());</span><br><span class="line">    EXPECT_EQ(a, b);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ::testing::InitGoogleTest(&amp;argc, argv);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> RUN_ALL_TESTS();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>CMakeLists.txt</p>
-<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cmake_minimum_required</span>(VERSION <span class="number">2.8</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">project</span>(bubble-sort)</span><br><span class="line"></span><br><span class="line"><span class="keyword">find_package</span>(GTest REQUIRED)</span><br><span class="line"></span><br><span class="line"><span class="keyword">include_directories</span>(<span class="variable">$&#123;GTEST_INCLUDE_DIRS&#125;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">enable_testing</span>()</span><br><span class="line"></span><br><span class="line"><span class="keyword">add_executable</span>(sort bubblesort.cpp main.cpp)</span><br><span class="line"><span class="keyword">add_executable</span>(unit_test <span class="keyword">test</span>.cpp bubblesort.cpp)</span><br><span class="line"></span><br><span class="line"><span class="keyword">target_link_libraries</span>( unit_test</span><br><span class="line">        <span class="variable">$&#123;GTEST_BOTH_LIBRARIES&#125;</span></span><br><span class="line">        pthread )</span><br><span class="line"></span><br><span class="line"><span class="keyword">add_test</span>(<span class="keyword">test</span> unit_test)</span><br></pre></td></tr></table></figure>
-
-<h2 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cmake ..</span><br><span class="line">make</span><br></pre></td></tr></table></figure>
-
-<p><code>make test</code>结果：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Running tests...</span><br><span class="line">Test project &#x2F;home&#x2F;chronoby&#x2F;Development&#x2F;GoogleTest&#x2F;hello&#x2F;build</span><br><span class="line">    Start 1: test</span><br><span class="line">1&#x2F;1 Test #1: test .............................   Passed    0.00 sec</span><br><span class="line"></span><br><span class="line">100% tests passed, 0 tests failed out of 1</span><br><span class="line"></span><br><span class="line">Total Test time (real) &#x3D;   0.00 sec</span><br></pre></td></tr></table></figure>
-
-<p><code>./unit_test</code> 结果：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;] Running 1 test from 1 test suite.</span><br><span class="line">[----------] Global test environment set-up.</span><br><span class="line">[----------] 1 test from test</span><br><span class="line">[ RUN      ] test.case1</span><br><span class="line">[       OK ] test.case1 (0 ms)</span><br><span class="line">[----------] 1 test from test (0 ms total)</span><br><span class="line"></span><br><span class="line">[----------] Global test environment tear-down</span><br><span class="line">[&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;] 1 test from 1 test suite ran. (0 ms total)</span><br><span class="line">[  PASSED  ] 1 test.</span><br></pre></td></tr></table></figure>
-
-<p>Hello, GoogleTest!</p>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2020/12/04/Hello_GoogleTest/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -444,6 +438,39 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C++</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/STL/" itemprop="url" rel="index">
+                    <span itemprop="name">STL</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -472,102 +499,14 @@
 
       
         
-          
-            <h1 id="Allocator"><a href="#Allocator" class="headerlink" title="Allocator"></a>Allocator</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>从STL运用角度而言，空间配置器是最不需要介绍的东西，它隐藏在一切组件背后。但若以STL实现角度而言，第一个需要介绍的就是空间配置去，因为整个STL的操作对象都存放在容器之内，而容器一定需要配置空间。</p>
-<p>以下介绍的是SGI STL提供的配置器</p>
-<h3 id="C-内存配置和释放操作"><a href="#C-内存配置和释放操作" class="headerlink" title="C++内存配置和释放操作"></a>C++内存配置和释放操作</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span> &#123;</span>...&#125;;</span><br><span class="line">Foo * pf = <span class="keyword">new</span> Foo;</span><br><span class="line"><span class="keyword">delete</span> pf;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>new内含两阶段操作</li>
-</ul>
-<ol>
-<li>调用<code>::operator new</code>配置内存</li>
-<li>调用<code>Foo::Foo()</code>构造对象</li>
-</ol>
-<ul>
-<li>delete也包含两阶段操作</li>
-</ul>
-<ol>
-<li>调用<code>Foo::~Foo()</code>将对象析构</li>
-<li>调用<code>::operator delete</code>释放内存</li>
-</ol>
-<ul>
-<li>STL_allocator决定将这两阶段操作区分开来。</li>
-</ul>
-<ol>
-<li>内存配置操作由alloc::allocate()负责，内存释放操作由alloc::deallocate()负责</li>
-<li>对象构造由::construct()负责，对象析构由::destroy()负责</li>
-</ol>
-<h3 id="构造和析构基本工具：construct-和destroy"><a href="#构造和析构基本工具：construct-和destroy" class="headerlink" title="构造和析构基本工具：construct()和destroy()"></a>构造和析构基本工具：construct()和destroy()</h3><ul>
-<li>construct()接受一个指针p和一个初值value，该函数将初值设定到指针所指空间上，C++的replacement new可用来完成这一任务</li>
-<li>destroy()有两个版本</li>
-</ul>
-<ol>
-<li>接受一个指针。直接调用该对象的析构函数即可</li>
-<li>接受first和last两个迭代器，将[first, last)范围内的对象析构掉</li>
-</ol>
-<p>为了防止范围很大且每个对象的析构函数都是trivial(无关紧要的) destructor，进行以下操作：</p>
-<ol>
-<li>利用value_type()获得迭代器所指对象的类型</li>
-<li>利用<code>__type_traits&lt;T&gt;</code>判断该类的析构函数是否为trivial。若是<br>(<strong>true_type)，则什么都不做；若否(</strong>false_type)，以循环方式遍历整个范围，且每经历一个对象调用一次destroy()</li>
-</ol>
-<h3 id="空间的分配和释放，std-alloc"><a href="#空间的分配和释放，std-alloc" class="headerlink" title="空间的分配和释放，std::alloc"></a>空间的分配和释放，std::alloc</h3><p>SGI的设计方法：</p>
-<ul>
-<li>向system heap请求空间</li>
-<li>考虑多线程状态</li>
-<li>考虑内存不足时的应变措施</li>
-<li>考虑过多小型区块可能造成的内存碎片问题</li>
-</ul>
-<p>源代码层面：</p>
-<ul>
-<li>以<code>::operator new()</code>和<code>::operator delete()</code>完成内存的分配和释放</li>
-</ul>
-<p>针对小型区块可能造成的内存破碎问题，采用双层配置器。</p>
-<ul>
-<li>第一级配置器使用<code>malloc()</code>和<code>free()</code></li>
-<li>第二级配置器视情况采用不同的策略：<ul>
-<li>当配置区块超过128byte时，视为“足够大”，调用第一级配置器</li>
-<li>当配置区块小于128byte时，视为“过小”，为了降低额外负担(overhead)，使用复杂的memory pool整理方式</li>
-</ul>
-</li>
-</ul>
-<h3 id="第一级配置器-malloc-alloc-template"><a href="#第一级配置器-malloc-alloc-template" class="headerlink" title="第一级配置器 __malloc_alloc_template"></a>第一级配置器 __malloc_alloc_template</h3><ul>
-<li>一级配置器以malloc(), free(), realloc()等C函数执行实际的内存分配、释放、重分配操作，并实现出类似C++ new-handler的机制</li>
-<li>所谓C++ new-handler机制是，它可以要求系统在内存分配需求无法满足时，调用一个你所指定的函数，即一旦::operator new无法完成任务，在丢出std::bad_alloc异常状态之前，会先调用由客户端指定的处理例程，该处理例程被称为new-handler</li>
-</ul>
-<h3 id="第二级配置器-default-alloc-template"><a href="#第二级配置器-default-alloc-template" class="headerlink" title="第二级配置器 __default_alloc_template"></a>第二级配置器 __default_alloc_template</h3><ul>
-<li>第二级配置避免太多小额区块造成的内存碎片</li>
-<li>小额区块带来的不仅是内存碎片，配置时的额外负担也是一个问题</li>
-<li>当区块小于128 byte时，以内存池管理：维护一系列大小为8 byte倍数的free-list</li>
-</ul>
-<h3 id="空间配置函数allocate"><a href="#空间配置函数allocate" class="headerlink" title="空间配置函数allocate()"></a>空间配置函数allocate()</h3><ul>
-<li>__default_alloc_template的标准接口函数</li>
-<li>先判断区块大小<ul>
-<li>大于128 bytes就调用第一级配置器</li>
-<li>小于128 bytes就检查对应free list，若有可用区块，直接拿来用；诺没有，则将区块大小上调至8倍数边界，然后调用refill()，准备为free list重新填充空间</li>
-</ul>
-</li>
-</ul>
-<h3 id="空间释放函数deallocate"><a href="#空间释放函数deallocate" class="headerlink" title="空间释放函数deallocate()"></a>空间释放函数deallocate()</h3><ul>
-<li>判断区块大小<ul>
-<li>大于128 bytes调用第一级配置器</li>
-<li>小于128 bytes找出对应free list，将区块回收</li>
-</ul>
-</li>
-</ul>
-<h3 id="重新填充free-lists"><a href="#重新填充free-lists" class="headerlink" title="重新填充free lists"></a>重新填充free lists</h3><ul>
-<li>从内存池取空间为free lsits重新填充空间</li>
-</ul>
-<h3 id="内存池"><a href="#内存池" class="headerlink" title="内存池"></a>内存池</h3><p>分为多种情况</p>
-<ul>
-<li>内存充足：则调出20个区块返回给free list</li>
-<li>内存不足以提供20个区块，但还足以供应一个以上的区块，拨出不足20个区块的空间出去，nobjs参数修改为实际能提供的区块数</li>
-<li>一个区块都无法供应，则使用malloc()中分配内存</li>
-<li>若system heap的空间不足，则利用out-of-memory处理机制（类似new-handler机制），释放其他内存来使用</li>
-<li>否则抛出bad_alloc异常</li>
-</ul>
-
-          
+          <h1 id="Allocator"><a href="#Allocator" class="headerlink" title="Allocator"></a>Allocator</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>从STL运用角度而言，空间配置器是最不需要介绍的东西，它隐藏在一切组件背后。但若以STL实现角度而言，第一个需要介绍的就是空间配置去，因为整个STL的操作对象都存放在容器之内，而容器一定需要配置空间。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2020/10/20/Allocator/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -656,6 +595,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Git/" itemprop="url" rel="index">
+                    <span itemprop="name">Git</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -684,95 +645,14 @@
 
       
         
-          
-            <h1 id="Git-简介和基础操作"><a href="#Git-简介和基础操作" class="headerlink" title="Git 简介和基础操作"></a>Git 简介和基础操作</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Git，是Linux开发者Linus开发的分布式版本控制系统（distributed revision control system）。版本控制系统是能够随着时间的推进记录一系列文件的变化以便于你以后想要的退回到某个版本的系统。版本控制系统分为三大类：本地版本控制系统，集中式版本控制系统和分布式版本控制系统。</p>
-<h2 id="Git-基础"><a href="#Git-基础" class="headerlink" title="Git 基础"></a>Git 基础</h2><p>不同于其他以文件变更列表的方式存储信息的系统（通常被称作基于差异（delta-based）的版本控制），在 Git 中，每当提交更新或保存项目状态是，它会对当时的全部文件创建一个快照并保存这个快照的索引。<br>Git工程有三个工作区域：工作目录，暂存区域，以及本地仓库。工作目录是你当前进行工作的区域；暂存区域是你运行<code>git add</code>命令后文件保存的区域，也是下次提交将要保存的文件；本地仓库就是版本库，记录了你工程某次提交的完整状态和内容，这意味着你的数据永远不会丢失。</p>
-<p>文件也有三种状态：已提交（committed），已修改（modified）和已暂存（staged）。已提交表示该文件已经被安全地保存在本地版本库中了；已修改表示修改了某个文件，但还没有提交保存；已暂存表示把已修改的文件放在下次提交时要保存的清单中，即暂存区域。<br>基本的 Git 工作流程如下：</p>
-<ul>
-<li>在工作区中修改文件。</li>
-<li>将你想要下次提交的更改选择性地暂存，这样只会将更改的部分添加到暂存区。</li>
-<li>提交更新，找到暂存区的文件，将快照永久性存储到 Git 目录。</li>
-</ul>
-<h2 id="Git-常用命令"><a href="#Git-常用命令" class="headerlink" title="Git 常用命令"></a>Git 常用命令</h2><ul>
-<li>获取 Git 仓库   </li>
-</ul>
-<p>有以下两种方式：</p>
-<ol>
-<li>在已存在目录中初始化仓库</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git init</span><br></pre></td></tr></table></figure>
-<p>该命令将创建一个名为 <code>.git</code> 的子目录，这个子目录含有你初始化的 Git 仓库中所有的必须文件。</p>
-<ol start="2">
-<li>克隆现有的仓库</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git clone &lt;url&gt;</span><br></pre></td></tr></table></figure>
-<p>比如，要克隆 Git 的链接库 libgit2，可以用下面的命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git clone https:&#x2F;&#x2F;github.com&#x2F;libgit2&#x2F;libgit2</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>检查当前文件状态</li>
-</ul>
-<p>查看仓库下文件处于什么状态。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git status</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>跟踪新文件</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git add &lt;filename&gt;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>提交更新</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git commit</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>重新提交</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git commit --amend</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>查看提交历史</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git log</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>取消暂存区的文件</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset HEAD &lt;filename&gt;</span><br></pre></td></tr></table></figure>
-
-
-<ul>
-<li>撤消对文件的修改</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git checkout -- &lt;filename&gt;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>查看远程仓库</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git remote -v</span><br></pre></td></tr></table></figure>
-<p>将远程仓库全部列出</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ cd grit</span><br><span class="line">$ git remote -v</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>自动抓取后合并该远程分支到当前分支</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git pull</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>推送到远程仓库</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git push origin master</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>获取帮助</li>
-</ul>
-<p>若你使用 Git 时需要获取帮助，有三种等价的方法可以找到 Git 命令的综合手册（manpage）：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git help &lt;verb&gt;</span><br><span class="line">$ git &lt;verb&gt; --help</span><br><span class="line">$ man git-&lt;verb&gt;</span><br></pre></td></tr></table></figure>
-
-<p>例如，要想获得 git config 命令的手册，执行</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git help config</span><br></pre></td></tr></table></figure>
-
-          
+          <h1 id="Git-简介和基础操作"><a href="#Git-简介和基础操作" class="headerlink" title="Git 简介和基础操作"></a>Git 简介和基础操作</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Git，是Linux开发者Linus开发的分布式版本控制系统(distributed revision control system)。版本控制系统是能够随着时间的推进记录一系列文件的变化以便于你以后想要的退回到某个版本的系统。版本控制系统分为三大类：本地版本控制系统，集中式版本控制系统和分布式版本控制系统。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2020/07/11/Git-%E7%AE%80%E4%BB%8B%E5%92%8C%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -859,7 +739,25 @@
             
 
             
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
 
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
             
 
           </nav>
