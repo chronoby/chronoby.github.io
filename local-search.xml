@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>Precomputed Radiance Transfer</title>
+    <link href="/2021/08/23/prt/"/>
+    <url>/2021/08/23/prt/</url>
+    
+    <content type="html"><![CDATA[<h1 id="Precomputed-Radiance-Transfer"><a href="#Precomputed-Radiance-Transfer" class="headerlink" title="Precomputed Radiance Transfer"></a>Precomputed Radiance Transfer</h1><p>尽管渲染方程十分优雅、简洁，但直接求解是不切实际的，因为积分域包含了无穷的方向。Precomputed Radiance Transfer(PRT)是一个计算实时全局光照的尝试，他把问题分成了两部分，一部分在预计算步骤解决，另一部分实时计算。通过一些简化和近似，PRT 等式可以直接从渲染方程推导出来。</p><span id="more"></span><h2 id="PTR"><a href="#PTR" class="headerlink" title="PTR"></a>PTR</h2><p>PRT 有两个主要的假设：</p><ul><li>场景中的所有物体不是发光体</li><li>光源是无穷远的(使入射光独立于入射点的位置)</li></ul><script type="math/tex; mode=display">L_o(p,\omega_o) = \int_{\Omega^+} L_i(p,\omega_i)\rho(p,\omega_i,\omega_o)V(p)max(0,n \cdot\omega_i)\mathrm{d}\omega_i</script><p>另一个 PRT 的假设是仅考虑漫反射(disfuse/Lambertian reflectance)，这种情况下，$\rho$ 是反射系数/Pi(常数)。我们可以将原方程写为</p><script type="math/tex; mode=display">L_o(p,\omega_o) = \rho \int_{\Omega^+} L_i(p,\omega_i) T(p, \omega_o, \omega_i)\mathrm{d}\omega_i</script><p>可见，传输部分和光照部分是相互独立的，可以分开计算。而 T 可以预计算。</p><h2 id="基函数"><a href="#基函数" class="headerlink" title="基函数"></a>基函数</h2><p>给定一个函数$f(x)$，基函数 $\beta$ 是一个用来投影和重构的函数的无限集。函数 &amp;f&amp; 到任何函数 $\beta$ 的投影用 $c_i$ 来衡量</p><script type="math/tex; mode=display">c_i = \int f(x)\beta_i(x)\mathrm{d}x</script><p>原函数 $f$ 可以写为</p><script type="math/tex; mode=display">f(x) = \lim\limits_{n\to\infty}\sum\limits_{i=1}^{n}c_i\beta_i(x)</script><p>只取有限个(n个)项</p><script type="math/tex; mode=display">f(x) = \sum\limits_{i=1}^{n}c_i\beta_i(x)</script><p>对于 PRT，我们使用正交的基函数，即任意两个不同基函数的积分为 0。同时提供了一个非常好的性质：</p><script type="math/tex; mode=display">c_k = \int f(x)\beta_k(x)\mathrm{d}x\\d_k = \int g(x)\beta_k(x)\mathrm{d}x\\\int f(x)g(x)\mathrm{d}x=\int \sum\limits_{k=1}^{n}c_k\beta_k(x) \sum\limits_{k=1}^{n}d_k\beta_k(x)\mathrm{d}x\\=\sum\limits_{k=1}^{n}c_kd_k\int\beta_k(x)\beta_k(x)\mathrm{d}x\\=\sum\limits_{k=1}^{n}c_kd_k</script><p>在 PRT 中，我们使用的正交基函数为 Spherical Harmonics(球面谐波函数)</p><p>这提供了一个有用的机制去分解渲染方程：</p><ol><li>将 $L$ 和 $T$ 投影到正交基(预处理阶段完成)</li><li>将积分近似为点积(运行时进行计算)</li></ol>]]></content>
+    
+    
+    <categories>
+      
+      <category>Graphics</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Rendering</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>辐射度量学、BRDF 和渲染方程</title>
     <link href="/2021/05/26/%E8%BE%90%E5%B0%84%E5%BA%A6%E9%87%8F%E5%AD%A6-BRDF-%E5%92%8C%E6%B8%B2%E6%9F%93%E6%96%B9%E7%A8%8B/"/>
     <url>/2021/05/26/%E8%BE%90%E5%B0%84%E5%BA%A6%E9%87%8F%E5%AD%A6-BRDF-%E5%92%8C%E6%B8%B2%E6%9F%93%E6%96%B9%E7%A8%8B/</url>
@@ -14,8 +39,6 @@
     <categories>
       
       <category>Graphics</category>
-      
-      <category>Rendering</category>
       
     </categories>
     
@@ -95,14 +118,12 @@
     <link href="/2020/10/20/Allocator/"/>
     <url>/2020/10/20/Allocator/</url>
     
-    <content type="html"><![CDATA[<h2 id="前言">前言</h2><p>从STL运用角度而言，空间配置器是最不需要介绍的东西，它隐藏在一切组件背后。但若以STL实现角度而言，第一个需要介绍的就是空间配置去，因为整个STL的操作对象都存放在容器之内，而容器一定需要配置空间。</p><span id="more"></span><p>以下介绍的是SGI STL提供的配置器</p><h3 id="c内存配置和释放操作">C++内存配置和释放操作</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span> &#123;</span>...&#125;;</span><br><span class="line">Foo * pf = <span class="keyword">new</span> Foo;</span><br><span class="line"><span class="keyword">delete</span> pf;</span><br></pre></td></tr></table></figure><ul><li>new内含两阶段操作</li></ul><ol type="1"><li>调用<code>::operator new</code>配置内存</li><li>调用<code>Foo::Foo()</code>构造对象</li></ol><ul><li>delete也包含两阶段操作</li></ul><ol type="1"><li>调用<code>Foo::~Foo()</code>将对象析构</li><li>调用<code>::operator delete</code>释放内存</li></ol><ul><li>STL_allocator决定将这两阶段操作区分开来。</li></ul><ol type="1"><li>内存配置操作由alloc::allocate()负责，内存释放操作由alloc::deallocate()负责</li><li>对象构造由::construct()负责，对象析构由::destroy()负责</li></ol><h3 id="构造和析构基本工具construct和destroy">构造和析构基本工具：construct()和destroy()</h3><ul><li>construct()接受一个指针p和一个初值value，该函数将初值设定到指针所指空间上，C++的replacement new可用来完成这一任务</li><li>destroy()有两个版本</li></ul><ol type="1"><li>接受一个指针。直接调用该对象的析构函数即可</li><li>接受first和last两个迭代器，将[first, last)范围内的对象析构掉</li></ol><p>为了防止范围很大且每个对象的析构函数都是trivial(无关紧要的) destructor，进行以下操作：</p><ol type="1"><li>利用value_type()获得迭代器所指对象的类型</li><li>利用<code>__type_traits&lt;T&gt;</code>判断该类的析构函数是否为trivial。若是 (__true_type)，则什么都不做；若否(__false_type)，以循环方式遍历整个范围，且每经历一个对象调用一次destroy()</li></ol><h3 id="空间的分配和释放stdalloc">空间的分配和释放，std::alloc</h3><p>SGI的设计方法：</p><ul><li>向system heap请求空间</li><li>考虑多线程状态</li><li>考虑内存不足时的应变措施</li><li>考虑过多小型区块可能造成的内存碎片问题</li></ul><p>源代码层面：</p><ul><li>以<code>::operator new()</code>和<code>::operator delete()</code>完成内存的分配和释放</li></ul><p>针对小型区块可能造成的内存破碎问题，采用双层配置器。</p><ul><li>第一级配置器使用<code>malloc()</code>和<code>free()</code></li><li>第二级配置器视情况采用不同的策略：<ul><li>当配置区块超过128byte时，视为“足够大”，调用第一级配置器</li><li>当配置区块小于128byte时，视为“过小”，为了降低额外负担(overhead)，使用复杂的memory pool整理方式</li></ul></li></ul><h3 id="第一级配置器-__malloc_alloc_template">第一级配置器 __malloc_alloc_template</h3><ul><li>一级配置器以malloc(), free(), realloc()等C函数执行实际的内存分配、释放、重分配操作，并实现出类似C++ new-handler的机制</li><li>所谓C++ new-handler机制是，它可以要求系统在内存分配需求无法满足时，调用一个你所指定的函数，即一旦::operator new无法完成任务，在丢出std::bad_alloc异常状态之前，会先调用由客户端指定的处理例程，该处理例程被称为new-handler</li></ul><h3 id="第二级配置器-__default_alloc_template">第二级配置器 __default_alloc_template</h3><ul><li>第二级配置避免太多小额区块造成的内存碎片</li><li>小额区块带来的不仅是内存碎片，配置时的额外负担也是一个问题</li><li>当区块小于128 byte时，以内存池管理：维护一系列大小为8 byte倍数的free-list</li></ul><h3 id="空间配置函数allocate">空间配置函数allocate()</h3><ul><li>__default_alloc_template的标准接口函数</li><li>先判断区块大小<ul><li>大于128 bytes就调用第一级配置器</li><li>小于128 bytes就检查对应free list，若有可用区块，直接拿来用；诺没有，则将区块大小上调至8倍数边界，然后调用refill()，准备为free list重新填充空间</li></ul></li></ul><h3 id="空间释放函数deallocate">空间释放函数deallocate()</h3><ul><li>判断区块大小<ul><li>大于128 bytes调用第一级配置器</li><li>小于128 bytes找出对应free list，将区块回收</li></ul></li></ul><h3 id="重新填充free-lists">重新填充free lists</h3><ul><li>从内存池取空间为free lsits重新填充空间</li></ul><h3 id="内存池">内存池</h3><p>分为多种情况</p><ul><li>内存充足：则调出20个区块返回给free list</li><li>内存不足以提供20个区块，但还足以供应一个以上的区块，拨出不足20个区块的空间出去，nobjs参数修改为实际能提供的区块数</li><li>一个区块都无法供应，则使用malloc()中分配内存</li><li>若system heap的空间不足，则利用out-of-memory处理机制（类似new-handler机制），释放其他内存来使用</li><li>否则抛出bad_alloc异常</li></ul>]]></content>
+    <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>从STL运用角度而言，空间配置器是最不需要介绍的东西，它隐藏在一切组件背后。但若以STL实现角度而言，第一个需要介绍的就是空间配置去，因为整个STL的操作对象都存放在容器之内，而容器一定需要配置空间。</p><span id="more"></span><p>以下介绍的是SGI STL提供的配置器</p><h3 id="C-内存配置和释放操作"><a href="#C-内存配置和释放操作" class="headerlink" title="C++内存配置和释放操作"></a>C++内存配置和释放操作</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Foo</span> &#123;</span>...&#125;;<br>Foo * pf = <span class="hljs-keyword">new</span> Foo;<br><span class="hljs-keyword">delete</span> pf;<br></code></pre></td></tr></table></figure><ul><li>new内含两阶段操作</li></ul><ol><li>调用<code>::operator new</code>配置内存</li><li>调用<code>Foo::Foo()</code>构造对象</li></ol><ul><li>delete也包含两阶段操作</li></ul><ol><li>调用<code>Foo::~Foo()</code>将对象析构</li><li>调用<code>::operator delete</code>释放内存</li></ol><ul><li>STL_allocator决定将这两阶段操作区分开来。</li></ul><ol><li>内存配置操作由alloc::allocate()负责，内存释放操作由alloc::deallocate()负责</li><li>对象构造由::construct()负责，对象析构由::destroy()负责</li></ol><h3 id="构造和析构基本工具：construct-和destroy"><a href="#构造和析构基本工具：construct-和destroy" class="headerlink" title="构造和析构基本工具：construct()和destroy()"></a>构造和析构基本工具：construct()和destroy()</h3><ul><li>construct()接受一个指针p和一个初值value，该函数将初值设定到指针所指空间上，C++的replacement new可用来完成这一任务</li><li>destroy()有两个版本</li></ul><ol><li>接受一个指针。直接调用该对象的析构函数即可</li><li>接受first和last两个迭代器，将[first, last)范围内的对象析构掉</li></ol><p>为了防止范围很大且每个对象的析构函数都是trivial(无关紧要的) destructor，进行以下操作：</p><ol><li>利用value_type()获得迭代器所指对象的类型</li><li>利用<code>__type_traits&lt;T&gt;</code>判断该类的析构函数是否为trivial。若是<br>(<strong>true_type)，则什么都不做；若否(</strong>false_type)，以循环方式遍历整个范围，且每经历一个对象调用一次destroy()</li></ol><h3 id="空间的分配和释放，std-alloc"><a href="#空间的分配和释放，std-alloc" class="headerlink" title="空间的分配和释放，std::alloc"></a>空间的分配和释放，std::alloc</h3><p>SGI的设计方法：</p><ul><li>向system heap请求空间</li><li>考虑多线程状态</li><li>考虑内存不足时的应变措施</li><li>考虑过多小型区块可能造成的内存碎片问题</li></ul><p>源代码层面：</p><ul><li>以<code>::operator new()</code>和<code>::operator delete()</code>完成内存的分配和释放</li></ul><p>针对小型区块可能造成的内存破碎问题，采用双层配置器。</p><ul><li>第一级配置器使用<code>malloc()</code>和<code>free()</code></li><li>第二级配置器视情况采用不同的策略：<ul><li>当配置区块超过128byte时，视为“足够大”，调用第一级配置器</li><li>当配置区块小于128byte时，视为“过小”，为了降低额外负担(overhead)，使用复杂的memory pool整理方式</li></ul></li></ul><h3 id="第一级配置器-malloc-alloc-template"><a href="#第一级配置器-malloc-alloc-template" class="headerlink" title="第一级配置器 __malloc_alloc_template"></a>第一级配置器 __malloc_alloc_template</h3><ul><li>一级配置器以malloc(), free(), realloc()等C函数执行实际的内存分配、释放、重分配操作，并实现出类似C++ new-handler的机制</li><li>所谓C++ new-handler机制是，它可以要求系统在内存分配需求无法满足时，调用一个你所指定的函数，即一旦::operator new无法完成任务，在丢出std::bad_alloc异常状态之前，会先调用由客户端指定的处理例程，该处理例程被称为new-handler</li></ul><h3 id="第二级配置器-default-alloc-template"><a href="#第二级配置器-default-alloc-template" class="headerlink" title="第二级配置器 __default_alloc_template"></a>第二级配置器 __default_alloc_template</h3><ul><li>第二级配置避免太多小额区块造成的内存碎片</li><li>小额区块带来的不仅是内存碎片，配置时的额外负担也是一个问题</li><li>当区块小于128 byte时，以内存池管理：维护一系列大小为8 byte倍数的free-list</li></ul><h3 id="空间配置函数allocate"><a href="#空间配置函数allocate" class="headerlink" title="空间配置函数allocate()"></a>空间配置函数allocate()</h3><ul><li>__default_alloc_template的标准接口函数</li><li>先判断区块大小<ul><li>大于128 bytes就调用第一级配置器</li><li>小于128 bytes就检查对应free list，若有可用区块，直接拿来用；诺没有，则将区块大小上调至8倍数边界，然后调用refill()，准备为free list重新填充空间</li></ul></li></ul><h3 id="空间释放函数deallocate"><a href="#空间释放函数deallocate" class="headerlink" title="空间释放函数deallocate()"></a>空间释放函数deallocate()</h3><ul><li>判断区块大小<ul><li>大于128 bytes调用第一级配置器</li><li>小于128 bytes找出对应free list，将区块回收</li></ul></li></ul><h3 id="重新填充free-lists"><a href="#重新填充free-lists" class="headerlink" title="重新填充free lists"></a>重新填充free lists</h3><ul><li>从内存池取空间为free lsits重新填充空间</li></ul><h3 id="内存池"><a href="#内存池" class="headerlink" title="内存池"></a>内存池</h3><p>分为多种情况</p><ul><li>内存充足：则调出20个区块返回给free list</li><li>内存不足以提供20个区块，但还足以供应一个以上的区块，拨出不足20个区块的空间出去，nobjs参数修改为实际能提供的区块数</li><li>一个区块都无法供应，则使用malloc()中分配内存</li><li>若system heap的空间不足，则利用out-of-memory处理机制（类似new-handler机制），释放其他内存来使用</li><li>否则抛出bad_alloc异常</li></ul>]]></content>
     
     
     <categories>
       
       <category>C++</category>
-      
-      <category>STL</category>
       
     </categories>
     
